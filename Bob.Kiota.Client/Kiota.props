@@ -5,28 +5,40 @@
 		<KiotaAutoInstallTool>true</KiotaAutoInstallTool>
 		<KiotaAutoInstallPackages>true</KiotaAutoInstallPackages>
 	</PropertyGroup>
+
+	<!--
+    Well-known metadata of the code generator item groups.
+	-->
+	<ItemGroup>
+		<AvailableItemName Include="KiotaReference" />
+	</ItemGroup>
+
+	<!--
+    Well-known metadata of the code generator item groups.
+	-->
+	<ItemDefinitionGroup>
+		<KiotaReference>
+			<!-- These are the only required arguments required by the CLI -->
+			<Language></Language>
+			
+			<!-- If these are not specified, the CLI will use default values -->
+			<OutputPath></OutputPath>
+			<ClassName></ClassName>
+			<NamespaceName></NamespaceName>
+			<LogLevel></LogLevel>
+			<BackingStore></BackingStore>
+			<AdditionalData></AdditionalData>
+			<Serializer></Serializer>
+			<Deserializer></Deserializer>
+			<MimeTypes></MimeTypes>
+			<IncludePath></IncludePath>
+			<ExcludePath></ExcludePath>
+			<DisableValidationRules></DisableValidationRules>
+			<!-- this is automatically populated based on the values of the other properties. Passed directly to the CLI-->
+			<Arguments></Arguments>
+		</KiotaReference>
+	</ItemDefinitionGroup>
 	
-	<!-- Propertis that control the actual CLI-->
-	<PropertyGroup>
-		<!-- These are the only required arguments required by the CLI -->
-		<KiotaDescriptionFile></KiotaDescriptionFile>
-		<KiotaLanguage></KiotaLanguage>
-
-		<!-- If these are not specified, the CLI will use default values -->
-		<KiotaOutputPath></KiotaOutputPath>
-		<KiotaClassName></KiotaClassName>
-		<KiotaNamespaceName></KiotaNamespaceName>
-		<KiotaLogLevel></KiotaLogLevel>
-		<KiotaBackingStore></KiotaBackingStore>
-		<KiotaAdditionlData></KiotaAdditionlData>
-		<KiotaSerializer></KiotaSerializer>
-		<KiotaDeserializer></KiotaDeserializer>
-		<KiotaMimeTypes></KiotaMimeTypes>
-		<KiotaIncludePath></KiotaIncludePath>
-		<KiotaExcludePath></KiotaExcludePath>
-		<KiotaDisableValidationRules></KiotaDisableValidationRules>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<KiotaDefaultPackages Include="Microsoft.Kiota.Abstractions"/>
 		<KiotaDefaultPackages Include="Microsoft.Kiota.Http.HttpClientLibrary"/>
