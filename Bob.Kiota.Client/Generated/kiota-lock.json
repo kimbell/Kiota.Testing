@@ -1,0 +1,29 @@
+{
+  "descriptionHash": "350A122DC3EBF9690D0F82B80EABEAC7AB978D95AFAE29F58B35E9A0C5E79487708C43EDC7D5486D0C3E134571C0FB4E996C0E889EC7CB5067F1C20767B071A1",
+  "descriptionLocation": "C:\\Github\\Kiota.Testing\\Bob.Kiota.Client\\.\\OpenApi.json",
+  "lockFileVersion": "1.0.0",
+  "kiotaVersion": "1.4.0",
+  "clientClassName": "TypeClient",
+  "clientNamespaceName": "Bob.Kiota.Client",
+  "language": "CSharp",
+  "usesBackingStore": false,
+  "includeAdditionalData": true,
+  "serializers": [
+    "Microsoft.Kiota.Serialization.Json.JsonSerializationWriterFactory",
+    "Microsoft.Kiota.Serialization.Text.TextSerializationWriterFactory",
+    "Microsoft.Kiota.Serialization.Form.FormSerializationWriterFactory"
+  ],
+  "deserializers": [
+    "Microsoft.Kiota.Serialization.Json.JsonParseNodeFactory",
+    "Microsoft.Kiota.Serialization.Text.TextParseNodeFactory",
+    "Microsoft.Kiota.Serialization.Form.FormParseNodeFactory"
+  ],
+  "structuredMimeTypes": [
+    "application/json",
+    "text/plain",
+    "application/x-www-form-urlencoded"
+  ],
+  "includePatterns": [],
+  "excludePatterns": [],
+  "disabledValidationRules": []
+}

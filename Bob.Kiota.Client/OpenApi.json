@@ -1,0 +1,222 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Bob.Kiota.Web",
+    "version": "1.0"
+  },
+  "paths": {
+    "/WeatherForecast/weather": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "summary": "Gets weather",
+        "operationId": "GetWeatherForecast",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WeatherForecast"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WeatherForecast/animals": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "summary": "Gets animals",
+        "operationId": "GetAnimals",
+        "parameters": [
+          {
+            "name": "correlationId",
+            "in": "header",
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/Animal"
+                      },
+                      {
+                        "$ref": "#/components/schemas/Dog"
+                      },
+                      {
+                        "$ref": "#/components/schemas/Cat"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WeatherForecast/echo-animals": {
+      "get": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "operationId": "EchoGetAnimals",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Animal"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Dog"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Cat"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/Animal"
+                      },
+                      {
+                        "$ref": "#/components/schemas/Dog"
+                      },
+                      {
+                        "$ref": "#/components/schemas/Cat"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Animal": {
+        "required": [
+          "bob"
+        ],
+        "type": "object",
+        "properties": {
+          "bob": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "chipStatus": {
+            "$ref": "#/components/schemas/ChipStatus"
+          }
+        },
+        "additionalProperties": false,
+        "discriminator": {
+          "propertyName": "bob",
+          "mapping": {
+            "d": "#/components/schemas/Dog",
+            "c": "#/components/schemas/Cat"
+          }
+        }
+      },
+      "Cat": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Animal"
+          }
+        ],
+        "properties": {
+          "lives": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChipStatus": {
+        "enum": [
+          "NotChipped",
+          "Chipped"
+        ],
+        "type": "string"
+      },
+      "Dog": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Animal"
+          }
+        ],
+        "properties": {
+          "something": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WeatherForecast": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "temperatureC": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "temperatureF": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

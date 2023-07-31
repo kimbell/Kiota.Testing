@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		
+		<OpenApiGenerateCodeOnBuild>true</OpenApiGenerateCodeOnBuild>
+        <!-- generated files are stored in this directory-->
+        <OpenApiCodeDirectory>Generated</OpenApiCodeDirectory>
+		<OpenApiGenerateCodeOnBuild>true</OpenApiGenerateCodeOnBuild>
+		<!-- generated files are stored in this directory-->
+		
+	</PropertyGroup>
+
+	<Import Project="Kiota.props" />
+	<Import Project="Kiota.targets" />
+	
+	<PropertyGroup>
+		<KiotaDescriptionFile>./OpenApi.json</KiotaDescriptionFile>
+		<KiotaOutputPath>./Generated</KiotaOutputPath>
+		<KiotaLanguage>CSharp</KiotaLanguage>
+		<KiotaClassName>TypeClient</KiotaClassName>
+		<KiotaNamespaceName>Bob.Kiota.Client</KiotaNamespaceName>
+	</PropertyGroup>
+		
+	<ItemGroup>
+	  <Folder Include="Generated\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Kiota.Abstractions" Version="1.2.1" />
+	  <PackageReference Include="Microsoft.Kiota.Http.HttpClientLibrary" Version="1.0.6" />
+	  <PackageReference Include="Microsoft.Kiota.Serialization.Form" Version="1.0.1" />
+	  <PackageReference Include="Microsoft.Kiota.Serialization.Json" Version="1.0.8" />
+	  <PackageReference Include="Microsoft.Kiota.Serialization.Text" Version="1.0.3" />
+	</ItemGroup>
+	
+</Project>

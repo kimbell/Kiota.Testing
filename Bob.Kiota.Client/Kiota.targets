@@ -1,0 +1,64 @@
+﻿<Project>
+
+	<!-- Install Kiota packages-->
+	<Target
+		Name="_KiotaInstallPackages"
+		Condition="'$(KiotaAutoInstallPackages)' == 'true'">
+
+		<ItemGroup>
+			<KiotaMissingReferences Include="@(KiotaDefaultPackages)" Exclude="@(PackageReference)" />
+		</ItemGroup>
+		
+		<Exec
+			Condition="'@(KiotaMissingReferences)' != ''"
+			Command="dotnet add package %(KiotaMissingReferences.Identity)" />
+	</Target>
+
+	<!-- Install the Kiota tool -->
+	<Target
+		Name="_KiotaInstallTool"
+		Condition="'$(KiotaAutoInstallTool)' == 'true'">
+		
+		<PropertyGroup>
+			<KiotaToolLocation>$(USERPROFILE)\.dotnet\tools\.store\microsoft.openapi.kiota</KiotaToolLocation>
+		</PropertyGroup>
+		
+		<Exec Condition="exists('$(KiotaToolLocation)') == 'false'" Command="dotnet tool install --global Microsoft.OpenApi.Kiota"/>
+	</Target>
+	
+	<!-- Run Kiota tool -->
+	<Target 
+		Name="_KiotaRunTool"
+		DependsOnTargets="_KiotaInstallTool;_KiotaInstallPackages"
+		BeforeTargets="BeforeCompile">
+
+		<!-- Make sure that required properties have been specified -->
+		<Error Condition="'$(KiotaDescriptionFile)' == ''" Text="KiotaDescriptionFile property must have a value" />
+		<Error Condition="'$(KiotaLanguage)' == ''" Text="KiotaLanguage property must have a value" />
+
+		<!-- Build up the CLI arguments -->
+		<PropertyGroup>
+			<KiotaArguments></KiotaArguments>
+			<KiotaArguments>$(KiotaArguments) --openapi $(KiotaDescriptionFile)</KiotaArguments>
+			<KiotaArguments>$(KiotaArguments) --language $(KiotaLanguage)</KiotaArguments>
+			
+			<KiotaArguments Condition="'$(KiotaClassName)' != ''">$(KiotaArguments) --class-name $(KiotaClassName)</KiotaArguments>
+			<KiotaArguments Condition="'$(KiotaNamespaceName)' != ''">$(KiotaArguments) --namespace-name $(KiotaNamespaceName)</KiotaArguments>
+			<KiotaArguments Condition="'$(KiotaOutputPath)' != ''">$(KiotaArguments) --output $(KiotaOutputPath)</KiotaArguments>
+			<KiotaArguments Condition="'$(KiotaLogLevel)' != ''">$(KiotaArguments) --log-level $(KiotaLogLevel)</KiotaArguments>
+			<KiotaArguments Condition="'$(KiotaBackingStore)' != ''">$(KiotaArguments) --backing-store $(KiotaBackingStore)</KiotaArguments>
+			<KiotaArguments Condition="'$(KiotaAdditionlData)' != ''">$(KiotaArguments) --additional-data $(KiotaAdditionlData)</KiotaArguments>
+			<KiotaArguments Condition="'$(KiotaSerializer)' != ''">$(KiotaArguments) --serializer $(KiotaSerializer)</KiotaArguments>
+			<KiotaArguments Condition="'$(KiotaDeserializer)' != ''">$(KiotaArguments) --deserializer $(KiotaDeserializer)</KiotaArguments>
+			<KiotaArguments Condition="'$(KiotaMimeTypes)' != ''">$(KiotaArguments) --structured-mime-types $(KiotaMimeTypes)</KiotaArguments>
+			<KiotaArguments Condition="'$(KiotaIncludePath)' != ''">$(KiotaArguments) --include-path $(KiotaIncludePath)</KiotaArguments>
+			<KiotaArguments Condition="'$(KiotaExcludePath)' != ''">$(KiotaArguments) --exclude-path $(KiotaExcludePath)</KiotaArguments>
+			<KiotaArguments Condition="'$(KiotaDisableValidationRules)' != ''">$(KiotaArguments) --disable-validation-rules $(KiotaDisableValidationRules)</KiotaArguments>
+		</PropertyGroup>
+
+		<!-- Run the generate command-->
+		<Exec
+			Command="kiota generate $(KiotaArguments)"/>
+	</Target>
+
+</Project>

@@ -1,0 +1,39 @@
+﻿<Project>
+
+	<!-- Properties that control tooling setup-->
+	<PropertyGroup>
+		<KiotaAutoInstallTool>true</KiotaAutoInstallTool>
+		<KiotaAutoInstallPackages>true</KiotaAutoInstallPackages>
+	</PropertyGroup>
+	
+	<!-- Propertis that control the actual CLI-->
+	<PropertyGroup>
+		<!-- These are the only required arguments required by the CLI -->
+		<KiotaDescriptionFile></KiotaDescriptionFile>
+		<KiotaLanguage></KiotaLanguage>
+
+		<!-- If these are not specified, the CLI will use default values -->
+		<KiotaOutputPath></KiotaOutputPath>
+		<KiotaClassName></KiotaClassName>
+		<KiotaNamespaceName></KiotaNamespaceName>
+		<KiotaLogLevel></KiotaLogLevel>
+		<KiotaBackingStore></KiotaBackingStore>
+		<KiotaAdditionlData></KiotaAdditionlData>
+		<KiotaSerializer></KiotaSerializer>
+		<KiotaDeserializer></KiotaDeserializer>
+		<KiotaMimeTypes></KiotaMimeTypes>
+		<KiotaIncludePath></KiotaIncludePath>
+		<KiotaExcludePath></KiotaExcludePath>
+		<KiotaDisableValidationRules></KiotaDisableValidationRules>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<KiotaDefaultPackages Include="Microsoft.Kiota.Abstractions"/>
+		<KiotaDefaultPackages Include="Microsoft.Kiota.Http.HttpClientLibrary"/>
+		<KiotaDefaultPackages Include="Microsoft.Kiota.Serialization.Form"/>
+		<KiotaDefaultPackages Include="Microsoft.Kiota.Serialization.Json"/>
+		<KiotaDefaultPackages Include="Microsoft.Kiota.Serialization.Text"/>
+	</ItemGroup>
+
+</Project>
+
