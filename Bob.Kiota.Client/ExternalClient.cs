@@ -5,6 +5,7 @@ namespace Bob.Kiota.Client
 {
     public interface IExternalClient
     {
+        public HttpClient HttpClient { get; }
         Task<IEnumerable<Models.WeatherForecast>?> GetForecastAsync();
     }
 
@@ -17,7 +18,10 @@ namespace Bob.Kiota.Client
         {
             var adapter = new HttpClientRequestAdapter(_authProvider, httpClient: httpClient);
             _client = new TypeClient(adapter);
+            HttpClient = httpClient;
         }
+
+        public HttpClient HttpClient { get; }
 
         public async Task<IEnumerable<Models.WeatherForecast>?> GetForecastAsync()
         {

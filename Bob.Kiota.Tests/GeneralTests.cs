@@ -18,5 +18,17 @@ namespace Bob.Kiota.Tests
                 Assert.NotNull(response);
             }
         }
+
+        [Fact]
+        public void NamedClientMatchesTypedClient()
+        {
+            using (var ts = new TestScope())
+            {
+                var typedClient = ts.Services.GetRequiredService<IExternalClient>();
+                var namedClient = ts.Services.GetRequiredService<IHttpClientFactory>().CreateClient("Bob");
+
+                Assert.Equal(typedClient.HttpClient.BaseAddress!.ToString(), namedClient.BaseAddress!.ToString());
+            }
+        }
     }
 }
